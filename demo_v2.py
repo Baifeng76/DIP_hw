@@ -80,6 +80,10 @@ class MDIApp(QMainWindow):
 
         # ================EDIT MENU=======================
         self.editMenu = self.menuBar().addMenu('Edit')
+        self.addIAction = QAction('Add', self)
+        self.addIAction.triggered.connect(self.addImage)
+        self.editMenu.addAction(self.addIAction)
+
         self.invertAction = QAction('Invert', self)
         self.invertAction.triggered.connect(self.invertImage)
         self.editMenu.addAction(self.invertAction)
@@ -178,6 +182,17 @@ class MDIApp(QMainWindow):
             file_path, _ = QFileDialog.getSaveFileName(self, 'Save Image', '', 'BMP Files (*.bmp);;All Files (*)', options=options)
             if file_path:
                 cv2.imwrite(file_path, self.current_image)
+
+    def addImage(self):
+        if hasattr(self, 'current_image'):
+            options = QFileDialog.Options()
+            file_path, _ = QFileDialog.getOpenFileName(self, 'Open Image', '', 'Image Files (*.bmp *.jpg *.png);;All Files (*)', options=options)
+            if file_path:
+                toAdd = cv2.imread(file_path)
+                self.showImage(toAdd, 'To Add')
+
+                toAdd = cv2.addWeighted(self.current_image, 0.5, toAdd, 0.5, 0)
+                self.showImage(toAdd, 'Added')
 
     def invertImage(self):
         if hasattr(self, 'current_image'):
