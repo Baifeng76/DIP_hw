@@ -165,7 +165,7 @@ Edge>Roberts或Sobel或Prewitt或Laplace
 
 下图分别是：原图（N=64）、M=2、M=16、M=62、M=64的图像。
 
-![大作业5](.\pics\大作业5.png)
+<img src=".\pics\大作业5.png" alt="大作业5" style="zoom:100%;" />
 
 ## 6 大作业(6)
 
